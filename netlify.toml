@@ -1,14 +1,9 @@
 [[redirects]]
   from = "/*"
-  to = "/views/index.html"
+  to = "/index.html"
   status = 200
 
 [[headers]]
   for = "/public/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/views/*"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Access-Control-Allow-Origin = "*"
