@@ -3,13 +3,22 @@
   to = "/index.html"
   status = 200
 
-[[headers]]
-  for = "/public/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-
-
 [[redirects]]
   from = "/style/*"
   to = "/public/style/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/script/*"
+  to = "/public/script/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/img/*"
+  to = "/public/img/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/uploads/*"
+  to = "/public/uploads/:splat"
   status = 200
