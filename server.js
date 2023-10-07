@@ -208,7 +208,7 @@ app.get("/appointment", checkLoggedIn, async (req, res) => {
 
 // Route untuk halaman pembayaran
 app.use("/", pembayaranRoutes);
-app.get("/pembayaran", async (req, res) => {
+app.get("/pembayaran", checkLoggedIn, async (req, res) => {
   try {
     const userEmail = req.session.email_pasien;
 
@@ -283,7 +283,7 @@ app.get("/pembayaran", async (req, res) => {
 
 // Route untuk halaman profil
 // app.use("/", profileRoutes);
-app.get("/profile", async (req, res) => {
+app.get("/profile", checkLoggedIn, async (req, res) => {
   if (req.session.email_pasien) {
     const email_pasien = req.session.email_pasien;
     const id_pasien = req.session.id_pasien;
