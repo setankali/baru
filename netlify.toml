@@ -7,3 +7,9 @@
   for = "/public/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+
+
+[[redirects]]
+  from = "/style/*"
+  to = "/public/style/:splat"
+  status = 200
