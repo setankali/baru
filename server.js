@@ -118,7 +118,7 @@ app.get("/index2", checkLoggedIn, (req, res) => {
       });
   } else {
     const isLoggedIn = false;
-    res.sendFile(path.join(__dirname, "views", "index2.html"), {
+    res.sendFile(path.join(__dirname, "views", "index.html"), {
       nama: null,
       id_pasien: null,
       foto_pasien: null,
