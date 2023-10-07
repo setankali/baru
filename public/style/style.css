@@ -592,6 +592,13 @@ button.box {
 
 /* review */
 
+.review p {
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1.7rem;
+  color: var(--light-color);
+}
+
 .review .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
