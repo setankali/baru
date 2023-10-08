@@ -46,7 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 function checkLoggedIn(req, res, next) {
-  if (req.session.userId) {
+  if (req.session.userId && req.session.email_pasien) {
     next();
   } else {
     const alertMessage = "Anda belum login. Silakan login terlebih dahulu.";
@@ -445,7 +445,8 @@ app.get("/logout", (req, res) => {
 
 // checklogin
 app.get("/check-login-status", (req, res) => {
-  const isLoggedIn = req.session.userId ? true : false;
+  const isLoggedIn =
+    req.session.userId && req.session.email_pasien ? true : false;
   res.json({ isLoggedIn });
 });
 
