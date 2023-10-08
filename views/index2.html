@@ -19,60 +19,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/navbar.css" />
   </head>
   <body>
     <!-- header section starts -->
     <!-- Tampilan header saat sudah login -->
-    <header class="header">
-      <a href="#" class="logo">
-        <img class="logo" src="/img/logo.png" alt="" />
-      </a>
-
-      <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#services">services</a>
-        <a href="#doctors">find a psychologist</a>
-        <a href="#book">book</a>
-        <a href="article1.html">blogs</a>
-        <a href="team.html">our team</a>
-      </nav>
-
-      <div style="display: flex; align-items: center">
-        <p
-          style="
-            color: #4682a9;
-            border: 1px solid #4682a9;
-            padding: 1em 5em 1em 1em;
-            border-radius: 50px;
-            font-size: 1.1em;
-          ">
-          <%= nama_pendek %>
-        </p>
-        <div class="profile">
-          <img
-            src="data:image/png;base64, <%= foto_pasien %>"
-            alt="Foto Profil"
-            class="poto_profile" />
-          <div class="profile-menu">
-            <button onclick="myFunction()" class="dropbtn"></button>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="/profile" style="margin: 0" class="dropdown">Profile</a>
-              <a href="/pembayaran" style="margin: 0" class="dropdown"
-                >Pembayaran</a
-              >
-              <a href="/logout" style="margin: 0" class="dropdown">Logout</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="menu-btn" class="fas fa-bars"></div>
-    </header>
+    <div id="navbar-container"></div>
     <!-- header section ends -->
 
     <!-- home section starts -->
     <section class="home" id="home">
       <div class="content">
+        <h1><a href="/navbar2">klik</a></h1>
         <h3
           style="font-size: 1.8rem; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2)">
           Hi <%= nama_pendek %>,
@@ -441,11 +399,42 @@
     <!-- custom js file link -->
 
     <script src="/script/script.js"></script>
+    <script src="/script/navbar_footer.js"></script>
     <script src="/script/scroll-to-section.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
       AOS.init();
+    </script>
+
+    <script>
+      // Fungsi untuk memeriksa apakah pengguna sudah login atau belum
+      function checkLoginStatus() {
+        fetch("/check-login-status") // Ganti dengan endpoint yang sesuai untuk memeriksa status login
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.isLoggedIn) {
+              // Pengguna sudah login, load navbar sesudah login
+              fetch("/navbar-after-login")
+                .then((response) => response.text())
+                .then((navbarHTML) => {
+                  document.getElementById("navbar-container").innerHTML =
+                    navbarHTML;
+                });
+            } else {
+              // Pengguna belum login, load navbar sebelum login
+              fetch("/navbar-before-login")
+                .then((response) => response.text())
+                .then((navbarHTML) => {
+                  document.getElementById("navbar-container").innerHTML =
+                    navbarHTML;
+                });
+            }
+          });
+      }
+
+      // Panggil fungsi checkLoginStatus saat halaman dimuat
+      window.onload = checkLoginStatus();
     </script>
   </body>
 </html>

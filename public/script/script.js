@@ -1,12 +1,13 @@
 // navbar responsive
-let menu = document.querySelector("#menu-btn");
-let navbar = document.querySelector(".header .navbar");
 
-menu.onclick = () => {
+function toggleMenu() {
+  let menu = document.querySelector("#menu-btn");
+  let navbar = document.querySelector(".header .navbar");
   menu.classList.toggle("fa-times");
   navbar.classList.toggle("active");
-};
+}
 
+//
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -43,15 +44,6 @@ function updateLayout() {
   }
 }
 window.addEventListener("resize", updateLayout);
-
-// footer
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("footer.html")
-    .then((response) => response.text())
-    .then((navbarHTML) => {
-      document.getElementById("footer-container").innerHTML = navbarHTML;
-    });
-});
 
 // async function getDataFromBackend() {
 //   try {

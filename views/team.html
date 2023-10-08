@@ -8,31 +8,10 @@
     <!-- Add any CSS or styles specific to the team page here -->
     <link rel="stylesheet" href="/style/our-team.css" />
     <link rel="stylesheet" href="/style/navbar.css" />
-    <script src="/script/script.js"></script>
   </head>
   <body>
     <!-- Tampilan header saat sudah login -->
-    <header class="header">
-      <a href="/index" class="logo">
-        <img class="logo" src="/img/logo.png" alt="" />
-      </a>
-
-      <nav class="navbar">
-        <a href="/index">home</a>
-        <a href="#services">services</a>
-        <a href="#doctors">find a psychologist</a>
-        <a href="#book">book</a>
-        <a href="article1.html">blogs</a>
-        <a href="team.html">our team</a>
-      </nav>
-
-      <div class="header-btn">
-        <a href="/signup" class="sign-up">Sign Up</a>
-        <a href="/login" class="login">Login</a>
-      </div>
-
-      <div id="menu-btn" class="fas fa-bars"></div>
-    </header>
+    <div id="navbar-container"></div>
     <!-- header section ends -->
     <!-- Copy the contents of your team section from the main page here -->
     <section class="our-team" id="our-team">
@@ -112,6 +91,37 @@
       </div>
     </section>
 
-    <div id="footer-container"></div>
+    <!-- <script src="/script/navbar_footer.js"></script> -->
+    <script src="/script/script.js"></script>
+
+    <script>
+      // Fungsi untuk memeriksa apakah pengguna sudah login atau belum
+      function checkLoginStatus() {
+        fetch("/check-login-status") // Ganti dengan endpoint yang sesuai untuk memeriksa status login
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.isLoggedIn) {
+              // Pengguna sudah login, load navbar sesudah login
+              fetch("/navbar-after-login")
+                .then((response) => response.text())
+                .then((navbarHTML) => {
+                  document.getElementById("navbar-container").innerHTML =
+                    navbarHTML;
+                });
+            } else {
+              // Pengguna belum login, load navbar sebelum login
+              fetch("/navbar-before-login")
+                .then((response) => response.text())
+                .then((navbarHTML) => {
+                  document.getElementById("navbar-container").innerHTML =
+                    navbarHTML;
+                });
+            }
+          });
+      }
+
+      // Panggil fungsi checkLoginStatus saat halaman dimuat
+      window.onload = checkLoginStatus();
+    </script>
   </body>
 </html>

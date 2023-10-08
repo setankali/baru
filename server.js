@@ -443,6 +443,50 @@ app.get("/logout", (req, res) => {
   });
 });
 
+// checklogin
+app.get("/check-login-status", (req, res) => {
+  const isLoggedIn = req.session.userId ? true : false;
+  res.json({ isLoggedIn });
+});
+
+// navbar
+app.get("/navbar-before-login", (req, res) => {
+  res.sendFile(__dirname + "/views/navbar.html");
+});
+
+// navbar
+app.get("/navbar-after-login", async (req, res) => {
+  try {
+    const email_pasien = req.session.email_pasien;
+
+    const pasien = await Pasien.findOne({
+      where: {
+        email_pasien: email_pasien,
+      },
+    });
+
+    if (!pasien) {
+      throw new Error("Pasien not found");
+    }
+
+    const namaPasienArray = pasien.nama_pasien.split(" ");
+    const nama_pendek = namaPasienArray.slice(0, 2).join(" ");
+
+    const navbar2Html = fs.readFileSync(
+      path.join(__dirname, "views", "navbar2.html"),
+      "utf8"
+    );
+
+    const renderedHtml = navbar2Html
+      .replace(/<%= nama_pendek %>/g, nama_pendek)
+      .replace(/<%= foto_pasien %>/g, pasien.foto_pasien);
+
+    res.send(renderedHtml);
+  } catch (error) {
+    res.status(500).send("An error occurred: " + error.message);
+  }
+});
+
 // Implementasi POST routes untuk form submission
 
 const port = process.env.PORT || 3000;

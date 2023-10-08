@@ -16,6 +16,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/navbar.css" />
 
     <!-- add animation on scroll library -->
     <link
@@ -25,27 +26,7 @@
   <body>
     <!-- header section starts -->
     <!-- Tampilan header saat belum login -->
-    <header class="header">
-      <a href="#" class="logo">
-        <img class="logo" src="/img/logo.png" alt="" />
-      </a>
-
-      <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#services">services</a>
-        <a href="#doctors">find a psychologist</a>
-        <a href="#book">book</a>
-        <a href="article1.html">blogs</a>
-        <a href="team.html">our team</a>
-      </nav>
-
-      <div class="header-btn">
-        <a href="/signup" class="sign-up">Sign Up</a>
-        <a href="/login" class="login">Login</a>
-      </div>
-
-      <div id="menu-btn" class="fas fa-bars"></div>
-    </header>
+    <div id="navbar-container"></div>
     <!-- header section ends -->
 
     <!-- home section starts -->
@@ -413,6 +394,7 @@
 
     <!-- custom js file link -->
     <script src="/script/script.js"></script>
+    <script src="/script/navbar_footer.js"></script>
     <script src="/script/scroll-to-section.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
