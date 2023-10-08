@@ -37,7 +37,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      maxAge: 24 * 60 * 60 * 1000, // Sesuaikan dengan kebutuhan Anda
+      maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );
@@ -159,7 +159,7 @@ app.use("/", appointmentRoutes);
 
 app.get("/appointment", checkLoggedIn, async (req, res) => {
   try {
-    const { email_pasien } = req.session;
+    const email_pasien = req.session.email_pasien;
 
     const pasien = await Pasien.findOne({
       where: { email_pasien },
